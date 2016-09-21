@@ -1,7 +1,15 @@
 # Vanilla-REST-API
 =============
 
-> 
+structures :
+- lib
+    - json-parse.js
+    - url-parse.js
+- model
+    - person.js
+- test
+- root 
+    - server.js
 
 ## Getting Started
 
