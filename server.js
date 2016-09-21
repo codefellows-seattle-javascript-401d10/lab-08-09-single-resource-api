@@ -1,16 +1,11 @@
 'use strict';
 
-// node modules
 const http = require('http');
-// npm modules
-// app modules
-const todo = require('./model/todo.js');
+const Todo = require('./model/todo.js');
 const Router = require('./lib/router.js');
 const storage = require('./lib/storage.js');
-// module constants
 const PORT = process.env.PORT || 3000;
 const router = new Router();
-// module logic
 
 router.get('/api/todo', function(req, res) {
   if (req.url.query.id) {
@@ -32,7 +27,7 @@ router.get('/api/todo', function(req, res) {
     });
     return;
   }
-  console.error(err);
+
   res.writeHead(400, {
     'Content-Type': 'text/plain',
   });
@@ -50,7 +45,6 @@ router.post('/api/todo', function(req,res) {
     res.write(JSON.stringify(todo));
     res.end();
   } catch (err) {
-    console.error(err);
     res.writeHead(400, {
       'Content-Type': 'text/plain',
     });
