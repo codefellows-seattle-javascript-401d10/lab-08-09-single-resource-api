@@ -2,10 +2,10 @@
 
 const uuid = require('node-uuid');
 
-module.exports = function(name, content) {
-  if (!name || !content) throw new Error('Name / content are expected');
+module.exports = function(name, sex) {
+  if (!name || !sex) throw new Error('Name / sex are expected');
   this.id = uuid.v1();
   this.name = name;
   this.creationDate = new Date();
-  this.content = content;
+  this.sex = sex;
 };

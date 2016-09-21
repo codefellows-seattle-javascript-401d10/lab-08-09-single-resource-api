@@ -1,7 +1,5 @@
 'use strict';
-
-const storage = require('node-storage');
-
+const storage = {};
 module.exports = exports = {};
 
 exports.createItem = function(schemaName, item) {
@@ -24,5 +22,18 @@ exports.fetchItem = function(schemaName, id){
     var item = schema[id];
     if(!item) return reject(new Error('item not found'));
     resolve(item);
+  });
+};
+
+exports.deleteItem = function(schemaName, id){
+  // do error handling
+  return new Promise((resolve, reject) => {
+    if (!schemaName) return reject(new Error('expected schemaName'));
+    if (!id) return reject(new Error('expected id'));
+    
+    if(!storage[schemaName]) return reject(new Error('schema not found'));
+    if(!storage[schemaName][id]) return reject(new Error('item not found'));
+
+    if(storage[schemaName][id]) resolve(delete (storage[schemaName][id]));
   });
 };
