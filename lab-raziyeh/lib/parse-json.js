@@ -4,15 +4,15 @@
 module.exports = function(req) {
   return new Promise((resolve, reject) => {
     if(req.method === 'POST' || req.method === 'PUT') {
-      this.body = {};
+      var body = '';
       req.on('data', data => {
         //because the request body just accept a string, so we convert the data to string and put it in request body
-        this.body += data.toString();
+        body += data.toString();
       });
       req.on('end', () => {
         try {
           //convert a data string to JSON format and put it in request body
-          req.body = JSON.parse(this.body);
+          req.body = JSON.parse(body);
           resolve(req);
         } catch (error) {
           console.log(error);

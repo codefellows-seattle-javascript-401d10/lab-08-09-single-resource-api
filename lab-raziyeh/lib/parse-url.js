@@ -3,7 +3,7 @@
 //querystring modules parse the request url
 
 const parseURL = require('url').parse;
-const parseQuery = require('guerystring').parse;
+const parseQuery = require('querystring').parse;
 
 module.exports = function(req) {
   req.url = parseURL(req.url);
