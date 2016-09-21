@@ -9,13 +9,18 @@
 ### Prerequisities
 
 - dependencies: 
-    cowsay: ^1.1.8  --> npm install --save cowsay
+
+```
+npm install --save node-uuid sup
+
+```
+
+- devDependencies: 
   
 ```
-npm install  -D gulp-eslint gulp-mocha mocha
+npm install -D gulp-eslint gulp-mocha mocha gulp chai
 
 ```
-
 
 ## Running
 
