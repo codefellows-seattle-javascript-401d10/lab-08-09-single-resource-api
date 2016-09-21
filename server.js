@@ -12,7 +12,7 @@ router.get('/api/todo', function(req, res) {
     storage.fetchItem('todo', req.url.query.id)
     .then( todo => {
       res.writeHead(200, {
-        'Content-Type': 'application/json',
+        'date-Type': 'application/json',
       });
       res.write(JSON.stringify(todo));
       res.end();
@@ -20,7 +20,7 @@ router.get('/api/todo', function(req, res) {
     .catch( err => {
       console.error(err);
       res.writeHead(404, {
-        'Content-Type': 'text/plain',
+        'date-Type': 'text/plain',
       });
       res.write('not found');
       res.end();
@@ -29,7 +29,7 @@ router.get('/api/todo', function(req, res) {
   }
 
   res.writeHead(400, {
-    'Content-Type': 'text/plain',
+    'date-Type': 'text/plain',
   });
   res.write('bad request');
   res.end();
@@ -37,16 +37,16 @@ router.get('/api/todo', function(req, res) {
 
 router.post('/api/todo', function(req,res) {
   try {
-    var todo = new Todo(req.body.name, req.body.content);
+    var todo = new Todo(req.body.item, req.body.date);
     storage.createItem('todo', todo);
     res.writeHead(200, {
-      'Content-Type': 'application/json',
+      'date-Type': 'application/json',
     });
     res.write(JSON.stringify(todo));
     res.end();
   } catch (err) {
     res.writeHead(400, {
-      'Content-Type': 'text/plain',
+      'date-Type': 'text/plain',
     });
     res.write('bad request');
     res.end();
@@ -58,14 +58,15 @@ router.delete('/api/todo', function(req, res){
     storage.deleteItem('todo', req.url.query.id)
     .then (() => {
       res.writeHead(204, {
-        'Content-Type': 'text/plain'
+        'date-Type': 'text/plain'
       });
       res.write('item at ' + req.url.query.id + ' was deleted.');
       res.end();
     })
-    .catch (() => {
+    .catch ( err => {
+      console.error(err);
       res.writeHead(404, {
-        'Content-Type': 'text/plain',
+        'date-Type': 'text/plain',
       });
       res.write('not found');
       res.end();
@@ -73,7 +74,7 @@ router.delete('/api/todo', function(req, res){
     return;
   }
   res.writeHead(400, {
-    'Content-Type': 'text/plain',
+    'date-Type': 'text/plain',
   });
   res.write('bad request');
   res.end();

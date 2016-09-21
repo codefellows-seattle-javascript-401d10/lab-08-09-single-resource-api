@@ -2,10 +2,10 @@
 
 const uuid = require('node-uuid');
 
-module.exports = function(name, content){
-  if (!name) throw new Error('name expected');
-  if (!content) throw new Error('content expected');
+module.exports = function(item, date){
+  if (!item) throw new Error('item expected');
+  if (!date) throw new Error('date expected');
   this.id = uuid.v1();
-  this.name = name;
-  this.content = content;
+  this.item = item;
+  this.date = date;
 };
