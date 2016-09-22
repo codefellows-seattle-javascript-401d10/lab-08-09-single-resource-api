@@ -34,4 +34,14 @@ describe('testing note routes', function() {
       });
     });
   });
+  describe('testing DELETE /api/note', function(){
+    it('should delete a note', function(done){
+      request.delete(`localhost:3000/api/note?id=${note.id}`)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(204);
+        done();
+      });
+    });
+  });
 });

@@ -50,27 +50,28 @@ module.exports = function(router){
     }
   });
 
-  // router.delete('/api/note', function(req, res) {
-  //   if (req.url.query.id) {
-  //     storage.deleteItem('note', req.url.query.id)
-  //     .then(note => {
-  //       res.writeHead(204);
-  //       res.end();
-  //     })
-  //     .catch (err => {
-  //       console.error(err);
-  //       res.writeHead(404, {
-  //         'Content-Type': 'text/plain',
-  //       });
-  //       res.write('not found');
-  //       res.end();
-  //     });
-  //     return;
-  //   }
-  //   res.writeHead(400, {
-  //     'Content-Type': 'text/plain',
-  //   });
-  //   res.write('bad request');
-  //   res.end();
-  // });
+  router.delete('/api/note', function(req, res) {
+    if (req.url.query.id) {
+      storage.deleteItem('note', req.url.query.id)
+      .then(() => {
+        res.writeHead(204);
+        res.write('successfully deleted'); //<---DO?
+        res.end();
+      })
+      .catch (err => {
+        console.error(err);
+        res.writeHead(404, {
+          'Content-Type': 'text/plain',
+        });
+        res.write('not found; unable to delete');
+        res.end();
+      });
+      return;
+    }
+    res.writeHead(400, {
+      'Content-Type': 'text/plain',
+    });
+    res.write('bad request');
+    res.end();
+  });
 };
