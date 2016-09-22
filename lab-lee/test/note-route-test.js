@@ -21,6 +21,14 @@ describe('testing note routes', function() {
         done();
       });
     });
+    it('should 400 bad request', function(done) {
+      request.post('localhost:3000/api/note')
+      .send({name: '', content: ''})
+      .end((res) => {
+        expect(res.status).to.equal(400);
+        done();
+      });
+    });
   });
   describe('testing GET /api/note', function(){
     it('should return a note', function(done){
@@ -33,6 +41,20 @@ describe('testing note routes', function() {
         done();
       });
     });
+    it('should return 404 not found', function(done){
+      request.get('localhost:3000/api/note?id=not-exist')
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        done();
+      });
+    });
+    it('should return 400 bad request', function(done){
+      request.get('localhost:3000/api/note?id=')
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        done();
+      });
+    });
   });
   describe('testing DELETE /api/note', function(){
     it('should delete a note', function(done){
@@ -40,6 +62,13 @@ describe('testing note routes', function() {
       .end((err, res) => {
         if (err) return done(err);
         expect(res.status).to.equal(204);
+        done();
+      });
+    });
+    it('should return 404 not found', function(done){
+      request.delete('localhost:3000/api/note?id=not-exist')
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
         done();
       });
     });
