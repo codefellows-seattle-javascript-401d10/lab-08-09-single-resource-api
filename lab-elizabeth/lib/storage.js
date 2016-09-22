@@ -31,8 +31,12 @@ exports.deleteItem = function(schemaName, id){
     if(!schemaName) return reject(new Error('expected schemaName'));
     if(!id) return reject(new Error('expected id'));
 
-    delete storage[schemaName];
-    resolve(id);
+    var schema = storage[schemaName];
+    if(!schema) return reject(new Error('schema not found'));
+    var item = schema[id];
+    if(!item) return reject(new Error('item not found'));
+    delete schema[id];
+    resolve('book deleted');
   });
 
 
