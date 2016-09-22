@@ -16,14 +16,14 @@ describe('Testing cat routes', function() {
         if (err) return done(err);
         expect(res.status).to.equal(200);
         expect(res.body.name).to.equal('Moggy');
-        expect(res.body.content).to.equal('Shorthair');
+        expect(res.body.breed).to.equal('Shorthair');
         cat = res.body;
         done();
       });
     });
     it('Should return a 400 error and an error message (incorrect object)', function(done) {
       request.post('localhost:3000/api/cat')
-      .send({text: 'Hello', content: 'Goodbye'})
+      .send({name: 'Moggy', content: 'Shorthair'})
       .end((err, res) => {
         expect(res.status).to.equal(400);
         expect(res.text).to.equal('Bad request!');
@@ -48,8 +48,8 @@ describe('Testing cat routes', function() {
       .end((err, res) => {
         if (err) return done(err);
         expect(res.status).to.equal(200);
-        expect(res.body.name).to.equal('Hello');
-        expect(res.body.content).to.equal('Goodbye');
+        expect(res.body.name).to.equal('Moggy');
+        expect(res.body.breed).to.equal('Shorthair');
         done();
       });
     });
