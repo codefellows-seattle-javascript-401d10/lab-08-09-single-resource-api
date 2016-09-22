@@ -59,33 +59,32 @@ router.post('/api/note', function(req, res) {
   }
 });
 
-router.delete('/api/note', function(req, res) {
-  if (req.url.query.id) {
-    storage.deleteItem('note', req.url.query.id)
-    .then(note => {
-      res.writeHead(204);
-      res.end();
-  })
-    .catch (err => {
-      console.error(err);
-      res.writeHead(404, {
-        'Content-Type': 'text/plain',
-      });
-      res.write('not found');
-      res.end();
-    });
-    return;
-  }
-  res.writeHead(400, {
-    'Content-Type': 'text/plain',
-  });
-  res.write('bad request');
-  res.end();
-}
-});
+// router.delete('/api/note', function(req, res) {
+//   if (req.url.query.id) {
+//     storage.deleteItem('note', req.url.query.id)
+//     .then(note => {
+//       res.writeHead(204);
+//       res.end();
+//     })
+//     .catch (err => {
+//       console.error(err);
+//       res.writeHead(404, {
+//         'Content-Type': 'text/plain',
+//       });
+//       res.write('not found');
+//       res.end();
+//     });
+//     return;
+//   }
+//   res.writeHead(400, {
+//     'Content-Type': 'text/plain',
+//   });
+//   res.write('bad request');
+//   res.end();
+// });
 
 const server = http.createServer(router.route());
 
 server.listen(PORT, function(){
   console.log('server is up at', PORT);
-})
+});
