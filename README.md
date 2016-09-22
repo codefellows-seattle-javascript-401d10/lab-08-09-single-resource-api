@@ -56,4 +56,19 @@
 * **2pts** a `GET` request to `/api/simple-resource-name` with no **?id=** should retrun an array of all of the ids for that resource
 
 ## About The Program:
-This program is a simple REST API that keeps track of and regulates journal entries. The specifications on what a valid journal entry should include is represented in the model with mandatory properties like a unique id, headline, and article. The user can write to and receive information from previously existing journal entries as well as write new ones and delete or edit old ones. To achieve this functionality a user can implement the following http methods: GET, POST, or DELETE. The program makes use of node's URL and querystring modules to parse a given URL which can then be routed and handled appropriate depending on what method was being passed in as part of the URL.
+This program is a simple REST API that keeps track of and regulates journal entries. The specifications on what a valid journal entry should include is represented in the model with mandatory properties like a unique id, headline, and article. The user can write to and receive information from previously existing journal entries as well as write new ones and delete or edit old ones. To achieve this functionality a user can implement the following http methods: GET, POST, or DELETE. The program makes use of node's URL and querystring modules to parse a given request URL which can then be routed and handled appropriately depending on what method was being passed in as part of the URL as an endpoint.
+
+##User Guide:
+It is important to structure your files as follows:
+* **lib dir** will contain your JSON and URL parse files and router and storage files
+* **model dir** will contain your object constructor which will be a simple resource
+* **test dir** will contain your program test files
+
+Once your file structure has been set up you can install the following as Dev dependencies:
+* mocha
+* chai
+* eslint
+* superagent
+
+Other dependencies:
+* node-uuid
