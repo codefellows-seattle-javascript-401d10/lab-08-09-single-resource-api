@@ -4,7 +4,7 @@
 const http = require('http');
 //npm modules
 //app modules
-const Note = require('./model/note');
+const Cat = require('./model/cat');
 const Router = require('./lib/router');
 const storage = require('./lib/storage');
 //module constants
@@ -12,35 +12,44 @@ const router = new Router();
 const PORT = process.env.PORT || 3000;
 //module logic
 
-router.get('/api/note', function(req, res){
+router.get('/api/cat', function(req, res){
   if (req.url.query.id) {
-    storage.fetchItem('note', req.url.query.id)
-    .then( note => {
+    storage.fetchItem('cat', req.url.query.id)
+    .then( cat => {
       res.writeHead(200, {
         'Content-Type': 'application/json',
       });
-      res.write(JSON.stringify(note));
+      console.log('res.statusCode: ', res.statusCode);
+      console.log('res.status: ', res.status);
+      res.write(JSON.stringify(cat));
       res.end();
     })
     .catch( err => {
       console.error(err);
-      res.writeHead(400, {
+      res.writeHead(404, {
         'Content-Type': 'text/plain',
       });
-      res.write('Not found!');
+      console.log('res.statusCode: ', res.statusCode);
+      res.write('Id not found!');
       res.end();
     });
+    return;
   }
+  res.writeHead(400, {
+    'Content-Type': 'text/plain',
+  });
+  res.write('Bad request!');
+  res.end();
 });
 
-router.post('/api/note', function(req, res){
+router.post('/api/cat', function(req, res){
   try {
-    var note = new Note(req.body.name, req.body.content);
-    storage.createItem('note', note);
+    var cat = new Cat(req.body.name, req.body.content);
+    storage.createItem('cat', cat);
     res.writeHead(200, {
       'Content-Type': 'application/json',
     });
-    res.write(JSON.stringify(note));
+    res.write(JSON.stringify(cat));
     res.end();
   } catch (err) {
     console.error(err);
@@ -51,6 +60,28 @@ router.post('/api/note', function(req, res){
     res.end();
   }
 });
+
+router.delete('/api/cat', function(req, res){
+  if (req.url.query.id) {
+    storage.deleteItem('cat', req.url.query.id)
+    .then( () => {
+      res.writeHead(204, {
+        'Content-Type': 'text/plain',
+      });
+      res.write('This message will not write.');
+      res.end();
+    })
+    .catch( err => {
+      console.error(err);
+      res.writeHead(400, {
+        'Content-Type': 'text/plain',
+      });
+      res.write('Not found! Need id');
+      res.end();
+    });
+  }
+});
+
 
 const server = http.createServer(router.route());
 
