@@ -59,7 +59,7 @@ router.post('/api/cat', function(req, res){
 });
 
 router.delete('/api/cat', function(req, res){
-  if (req.url.query.id) {
+  if (req.url.query.id) { //what if the if statement is false? we need some more code after this block, a 400 message.
     storage.deleteItem('cat', req.url.query.id)
     .then( () => {
       res.writeHead(204, {
@@ -74,7 +74,7 @@ router.delete('/api/cat', function(req, res){
         'Content-Type': 'text/plain',
       });
       res.write('Not found! Need id');
-      res.end();
+      res.end(); //put the extra cred here.
     });
   }
 });
