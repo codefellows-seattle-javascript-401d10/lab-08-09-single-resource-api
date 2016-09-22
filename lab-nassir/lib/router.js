@@ -5,6 +5,7 @@
 //app modules
 const parseUrl = require('./parse-url');
 const parseJson = require('./parse-json');
+const response = require('./response');
 //module constants
 //module logic
 
@@ -39,26 +40,18 @@ Router.prototype.route = function(){
       parseUrl(req),
       parseJson(req),
     ])
-    .then(() => {
+    .then( () => {
       if(typeof this.routes[req.method][req.url.pathname] === 'function'){
         this.routes[req.method][req.url.pathname](req, res);
         return;
       }
 
       console.error('Route not found!');
-      res.writeHead(404, {
-        'Content-Type': 'text/plain',
-      });
-      res.write('Not found!');
-      res.end();
+      response.sendText(res, 404, 'Not found!');
     })
     .catch( err => {
       console.error(err);
-      res.writeHead(400, {
-        'Content-Type': 'text/plain',
-      });
-      res.write('Bad request!');
-      res.end();
+      response.sendText(res, 400, 'Bad router request!');
     });
   };
 };
