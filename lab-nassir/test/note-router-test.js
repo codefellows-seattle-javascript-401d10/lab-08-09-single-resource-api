@@ -11,12 +11,12 @@ describe('Testing cat routes', function() {
   describe('Testing POST /api/cat', function() {
     it('Should return a cat', function(done) {
       request.post('localhost:3000/api/cat')
-      .send({name: 'Hello', content: 'Goodbye'})
+      .send({name: 'Moggy', breed: 'Shorthair'})
       .end((err, res) => {
         if (err) return done(err);
         expect(res.status).to.equal(200);
-        expect(res.body.name).to.equal('Hello');
-        expect(res.body.content).to.equal('Goodbye');
+        expect(res.body.name).to.equal('Moggy');
+        expect(res.body.content).to.equal('Shorthair');
         cat = res.body;
         done();
       });

@@ -19,8 +19,6 @@ router.get('/api/cat', function(req, res){
       res.writeHead(200, {
         'Content-Type': 'application/json',
       });
-      console.log('res.statusCode: ', res.statusCode);
-      console.log('res.status: ', res.status);
       res.write(JSON.stringify(cat));
       res.end();
     })
@@ -29,7 +27,6 @@ router.get('/api/cat', function(req, res){
       res.writeHead(404, {
         'Content-Type': 'text/plain',
       });
-      console.log('res.statusCode: ', res.statusCode);
       res.write('Id not found!');
       res.end();
     });
@@ -44,7 +41,7 @@ router.get('/api/cat', function(req, res){
 
 router.post('/api/cat', function(req, res){
   try {
-    var cat = new Cat(req.body.name, req.body.content);
+    var cat = new Cat(req.body.name, req.body.breed);
     storage.createItem('cat', cat);
     res.writeHead(200, {
       'Content-Type': 'application/json',
@@ -86,5 +83,5 @@ router.delete('/api/cat', function(req, res){
 const server = http.createServer(router.route());
 
 server.listen(PORT, function(){
-  console.log('Master, the Server awaits your noble command!\nServer exists but to serve!\nIssue Server commands! It begs you to command it!\nPort', PORT);
+  console.log('Welcome to CatAPI, the world\'s least functional cat-based API!\nRemember the CatAPI motto: We exist and owe you no explanation why!(tm)\nThe server is working. Meow.\nListening on PORT', PORT);
 });
