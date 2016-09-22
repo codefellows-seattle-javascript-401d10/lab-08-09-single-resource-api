@@ -14,13 +14,13 @@ describe('testing book routes', function(){
       .send({
         author: 'C.S.Lewis',
         title: 'The Magicians Nephew',
-        description: 'Something about Narnia.',
+        description: 'Something about Narnia',
       })
       .end((err, res) => {
         if(err) return done(err);
         expect(res.status).to.equal(200);
         expect(res.body.author).to.equal('C.S.Lewis');
-        expect(res.body.title).to.equal('the Magicians Nephew');
+        expect(res.body.title).to.equal('The Magicians Nephew');
         expect(res.body.description).to.equal('Something about Narnia');
         book = res.body;
         done();
@@ -46,7 +46,7 @@ describe('testing book routes', function(){
         if(err) return done(err);
         expect(res.status).to.equal(200);
         expect(res.body.author).to.equal('C.S.Lewis');
-        expect(res.body.title).to.equal('the Magicians Nephew');
+        expect(res.body.title).to.equal('The Magicians Nephew');
         expect(res.body.description).to.equal('Something about Narnia');
         done();
       });
