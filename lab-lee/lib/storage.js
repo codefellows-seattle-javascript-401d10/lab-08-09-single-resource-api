@@ -2,6 +2,7 @@
 
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
+const mkdirp = Promise.promisifyAll(require('mkdirp'), {suffix: 'Prom'});
 
 // const storage = {};
 
@@ -13,7 +14,13 @@ exports.createItem = function(schemaName, item){
   if (!item) return Promise.reject(new Error('expected an item'));
 
   let json = JSON.stringify(item);
-  return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
+  return fs.accessProm(`${__dirname}/../data/${schemaName}`)
+  .catch(err => {
+    if(err.code === 'ENOENT') {
+      return mkdirp.sync(`${__dirname}/../data/${schemaName}`);
+    }
+  })
+  .then( () => fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json))
   .then( () => item)
   .catch( err => Promise.reject(err));
 };
