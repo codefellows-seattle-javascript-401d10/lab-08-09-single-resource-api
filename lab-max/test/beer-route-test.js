@@ -77,4 +77,15 @@ describe('testing beer routes', function(){
       });
     });
   });
+
+  describe('testing DELETE /api/beer', function(){
+    it('should return a 204 status code', function(done){
+      request.delete(`localhost:3000/api/beer?id=${beer.id}`)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(204);
+        done();
+      });
+    });
+  });
 });
