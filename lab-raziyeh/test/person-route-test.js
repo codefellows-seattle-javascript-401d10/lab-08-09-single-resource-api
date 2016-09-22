@@ -8,7 +8,6 @@ require('../server.js');
 describe('testing note rotues', function(){
   var person = null;
 
-
   describe('testing POST /api/person', function(){
     it('save a Person - POST', function(done){
       request.post('localhost:3000/api/person')
@@ -47,7 +46,18 @@ describe('testing note rotues', function(){
       });
     });
   });
-  
-  // GET - test 200, response body like {<data>} for a request made with a valid id
 
+  // GET - test 200, response body like {<data>} for a request made with a valid id
+  describe('testing GET /api/person', function(){
+    it('return person data with valid id - GET', function(done){
+      request.get(`localhost:3000/api/person?id=${person.id}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.id).to.equal(person.id);
+          expect(res.body.name).to.equal(person.name);
+          expect(res.body.sex).to.equal(person.sex);
+          done();
+        });
+    });
+  });
 });
