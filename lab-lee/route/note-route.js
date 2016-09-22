@@ -53,11 +53,9 @@ module.exports = function(router){
   router.delete('/api/note', function(req, res) {
     if (req.url.query.id) {
       storage.deleteItem('note', req.url.query.id)
-      .then(note => {
-        res.writeHead(204, {
-          'Content-type': 'text/plain',
-        });
-        res.write('successfully deleted');
+      .then(() => {
+        res.writeHead(204);
+        res.write('successfully deleted'); //<---DO?
         res.end();
       })
       .catch (err => {

@@ -33,6 +33,17 @@ exports.fetchItem = function(schemaName, id) {
   })
   .catch(err => Promise.reject(err));
 };
+
+exports.deleteItem = function(schemaName, id) {
+  if (!schemaName) return Promise.reject(new Error('expected a schemaName'));
+  if (!id) return Promise.reject(new Error('expected an id'));
+
+  return fs.unlinkProm(`${__dirname}/../data/${schemaName}/${id}.json`)
+  .then(() => {
+    console.log(schemaName, id, 'has been deleted');
+  })
+  .catch(err => Promise.reject(err));
+};
 //
 // exports.deleteItem = function(schemaName, id) {
 //   return new Promise((resolve, reject) => {
