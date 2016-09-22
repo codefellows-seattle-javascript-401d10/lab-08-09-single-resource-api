@@ -3,6 +3,7 @@
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'),{suffix:'Prom'});
 const del = require('del');
+const mkdirp = Promise.promisifyAll(require('mkdirp-bluebird'),{suffix:'Prom'});
 
 //const storage = {};
 module.exports = exports = {};
@@ -10,11 +11,12 @@ module.exports = exports = {};
 exports.createItem = function(schemaName, item) {
   if(!schemaName) return Promise.reject(new Error('expected schemaName'));
   if(!item) return Promise.reject(new Error('expected item'));
-
-  let json = JSON.stringify(item);
-  return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`,json)
-  .then(() => item)
-  .catch( err => Promise.reject(err));
+  
+  return mkdirp(`${__dirname}/../data/${schemaName}`)
+  .then(() => console.log('Done'))
+  .then(() => fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`,JSON.stringify(item)))
+  .then(item => item)
+  .catch( err => Promise.reject('error',err));
 };
 
 exports.fetchItem = function(schemaName, id){
