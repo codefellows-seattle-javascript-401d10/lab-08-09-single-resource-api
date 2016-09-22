@@ -5,23 +5,24 @@ const expect = require('chai').expect;
 
 require('../server.js');
 
-describe('testing note rotues', function(){
+describe('testing Person Rotues', function(){
   var person = null;
 // POST - test 200, response body like {<data>} for a post request with a valid body
   describe('testing POST /api/person', function(){
     it('save a Person - POST', function(done){
       request.post('localhost:3000/api/person')
-      .send({name: 'rozi', sex: 'male'})
+      .send({name: 'rozi', sex: 'female'})
       .end((err, res) => {
         if (err) return done(err);
         expect(res.status).to.equal(200);
         expect(res.body.name).to.equal('rozi');
-        expect(res.body.sex).to.equal('male');
+        expect(res.body.sex).to.equal('female');
         person = res.body;
         done();
       });
     });
   });
+
 // POST - test 400, responds with 'bad request' for if no body provided or invalid body
   describe('testing POST /api/person', function(){
     it('responds with bad request - POST', function(done){
@@ -34,6 +35,7 @@ describe('testing note rotues', function(){
       });
     });
   });
+
 // GET - test 404, responds with 'not found' for valid request made with an id that was not found
   describe('testing GET /api/person', function(){
     it('return an error with unValid ID - GET', function(done){
@@ -71,4 +73,15 @@ describe('testing note rotues', function(){
         });
     });
   });
-});
+
+  // GET - write a test to ensure that your api returns a status code of 404 for routes that have not been registered
+  describe('testing GET /api/person', function(){
+    it('return an error with unRegistered Route - GET', function(done){
+      request.get('localhost:3000/api/person/wrongroute')
+      .end((err, res) => {
+        expect(res.status).to.be.equal(404);
+        done();
+      });
+    });
+  });
+}); 
