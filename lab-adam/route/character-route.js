@@ -11,7 +11,7 @@ module.exports = function(router){
       .then(character => {
         response.sendJSON(res, 200, character);
       })
-      .catch(err => {
+      .catch(() => {
         response.sendText(res, 404, 'not found');
       });
       return;
@@ -28,7 +28,7 @@ module.exports = function(router){
       .then(() => {
         response.sendText(res, 204);
       })
-      .catch(err => {
+      .catch(() => {
         response.sendText(res, 404, 'not found');
       });
       return;
