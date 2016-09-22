@@ -7,6 +7,15 @@ const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 
 module.exports = exports = {};
 
+function createDirectories (schemaName){
+  if (!schemaName){
+    mkdirp(`${__dirname}/../data/${schemaName}`, err => {
+      if (err) return err;
+      console.log('new data file created');
+    });
+  }
+}
+
 exports.createItem = function(schemaName, item){
   //do error handling
   if (!schemaName) return Promise.reject(new Error('expected schemaName'));
@@ -14,6 +23,7 @@ exports.createItem = function(schemaName, item){
 
 
   let json = JSON.stringify(item);
+  createDirectories(schemaName);
   return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
   .then( () => item )
   .catch( err => Promise.reject(err));
@@ -43,7 +53,7 @@ exports.deleteItem = function(schemaName, id){
   return del([`${__dirname}/../data/${schemaName}/${id}.json`])
   .then ( paths => {
     try{
-      console.log('file deleted?\n', paths.join('\n'));
+      console.log('file deleted at: \n', paths.join('\n'));
     } catch (err) {
       return Promise.reject(err);
     }

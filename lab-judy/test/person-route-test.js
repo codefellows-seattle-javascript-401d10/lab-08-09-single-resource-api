@@ -61,8 +61,6 @@ describe('testing person routes', function(){
 
   describe('testing if status is 200 with valid id', function(){
     it('should return status 200 with valid id', function(done){
-      console.log(person, 'line 66');
-      console.log(person.id, 'line 67');
       request.get(`localhost:3000/api/person?id=${person.id}`)
     .end ((err, res) => {
       expect(res.status).to.equal(200);
@@ -85,6 +83,7 @@ describe('testing person routes', function(){
       });
     });
   });
+
   describe('testing #storage.deleteItem', function(){
     it('should delete my ass', function(done){
       request.delete(`localhost:3000/api/person?id=${person.id}`)
@@ -95,5 +94,7 @@ describe('testing person routes', function(){
       });
     });
   });
+
+
 
 });

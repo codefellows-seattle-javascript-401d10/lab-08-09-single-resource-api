@@ -36,9 +36,8 @@ module.exports = function(router) {
   router.delete('/api/person', function(req, res){
     if (req.url.query.id)
       try {
-        console.log('is delete working?');
         storage.deleteItem('person', req.url.query.id);
-        response.sendText(res, 204, null);
+        response.sendText(res, 204, 'person deleted');
       } catch (err){
         console.error(err);
         response.sendText(res, 404, 'not found');
