@@ -1,6 +1,14 @@
 'use strict';
-const storage = {};
+const storage = module.exports = {};
 module.exports = exports = {};
+
+//Bonus part
+// exports.default = function(schemaName, data) {
+//   return new Promise((resolve, reject) => {
+//     if (!schemaName) return reject(new Error('expected schemaName'));
+//     return Promise.resolve(data.toString());
+//   });
+// };
 
 exports.createItem = function(schemaName, item) {
   if (!schemaName) return Promise.reject(new Error('expected schemaName'));

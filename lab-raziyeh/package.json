@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "node-uuid": "^1.4.7",
-    "sup": "0.0.4"
+    "sup": "0.0.4",
+    "superagent": "^2.3.0"
   }
 }

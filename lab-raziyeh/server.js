@@ -12,6 +12,23 @@ const PORT = process.env.PORT || 3000;
 const router = new Router();
 // module logic
 
+//Bonus part
+// router.get('/api/person', function(req, res) {
+//   storage.default('person', storage.storage)
+//     .then( () => {
+//       res.writeHead(200, {'Content-Type': 'application/json'});
+//       res.write(storage.storage);
+//       res.end();
+//     })
+//     .catch( err => {
+//       console.error(err);
+//       res.writeHead(404, {'Content-Type': 'text/plain'});
+//       res.write('not found');
+//       res.end();
+//     });  
+// });
+
+
 router.get('/api/person', function(req, res) {
   if (req.url.query.id) {
     storage.fetchItem('person', req.url.query.id)
@@ -73,6 +90,7 @@ router.delete('/api/person', function(req, res) {
   res.write('bad request');
   res.end();
 });
+
 
 const server = http.createServer(router.route());
 
