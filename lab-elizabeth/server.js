@@ -12,33 +12,7 @@ const PORT = process.env.PORT || 3000;
 const router = new Router();
 //module logic
 
-router.delete('/api/book', function(req, res){
-  if(req.url.query.id){
-    storage.fetchItem('book', req.url.query.id)
-    .then(book => {
-      res.writeHead(204, {
-        'Content-Type': 'application/json',
-      });
-      res.end();
-      var title = book.title;
-      storage.deleteItem('book', req.url.query.id)
-      .then(() => {
-        res.write(`${title} deleted`);
-        res.end();
-      })
-      .catch(err => {
-        console.error(err);
-        res.writeHead(404, {
-          'Content-Type': 'text/plain',
-        });
-        res.write('not found');
-        res.end();
-      });
-    });
-    return;
-  }
-});
-
+//should return an already existing recipe
 router.get('/api/book', function(req, res){
   if(req.url.query.id){
     storage.fetchItem('book', req.url.query.id)
@@ -59,16 +33,23 @@ router.get('/api/book', function(req, res){
     });
     return;
   }
+  res.writeHead(400, {
+    'Content-Type': 'text/plain',
+  });
+  res.write('bad request');
+  res.end();
+  // storage.fetchItem()
 });
 
+//should create a recipe on the storage
 router.post('/api/book', function(req, res){
   try {
     var book = new Book(req.body.title, req.body.author, req.body.description);
     storage.createItem('book', book);
     res.writeHead(200, {
-      'Content-Type': 'text/plain',
+      'Content-Type': 'application/json',
     });
-    res.write('bad request');
+    res.write(JSON.stringify(book));
     res.end();
   } catch(err) {
     console.error(err);
@@ -78,6 +59,28 @@ router.post('/api/book', function(req, res){
     res.write('bad request');
     res.end();
   }
+});
+
+//should delete an already existing recipe
+router.delete('/api/book', function(req, res){
+  if(req.url.query.id){
+    storage.deleteItem('recipe', req.url.query.id)
+    .then(() => {
+      res.writeHead(204);
+      res.end();
+    })
+    .catch(err => {
+      console.error(err);
+      res.write('not found');
+      res.end();
+    });
+    return;
+  }
+  res.writeHead(400, {
+    'Content-Type': 'text/plain',
+  });
+  res.write('bad request');
+  res.end();
 });
 
 const server = http.createServer(router.route());

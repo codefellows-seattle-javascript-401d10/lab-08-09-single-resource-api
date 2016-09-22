@@ -35,9 +35,8 @@ exports.deleteItem = function(schemaName, id){
     if(!schema) return reject(new Error('schema not found'));
     var item = schema[id];
     if(!item) return reject(new Error('item not found'));
-    delete schema[id];
-    resolve('book deleted');
+    schema = null;
+    resolve();
   });
-
 
 };
