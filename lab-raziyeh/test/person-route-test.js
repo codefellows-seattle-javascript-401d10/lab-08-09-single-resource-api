@@ -7,7 +7,7 @@ require('../server.js');
 
 describe('testing note rotues', function(){
   var person = null;
-
+// POST - test 200, response body like {<data>} for a post request with a valid body
   describe('testing POST /api/person', function(){
     it('save a Person - POST', function(done){
       request.post('localhost:3000/api/person')
@@ -22,7 +22,18 @@ describe('testing note rotues', function(){
       });
     });
   });
-
+// POST - test 400, responds with 'bad request' for if no body provided or invalid body
+  describe('testing POST /api/person', function(){
+    it('responds with bad request - POST', function(done){
+      request.post('localhost:3000/api/person')
+      .send({family:'wrong property'})
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        expect(res.text).to.be.equal('bad request');
+        done();
+      });
+    });
+  });
 // GET - test 404, responds with 'not found' for valid request made with an id that was not found
   describe('testing GET /api/person', function(){
     it('return an error with unValid ID - GET', function(done){
