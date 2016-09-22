@@ -13,7 +13,7 @@ structures :
     - person-route-test.js
 - root 
     - server.js
-    - gulffile.js
+    - gulpfile.js
     - .gitignore
     - .eslintrc
     - README.md
