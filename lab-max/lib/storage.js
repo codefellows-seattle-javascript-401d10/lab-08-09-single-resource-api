@@ -9,13 +9,7 @@ module.exports = exports = {};
 exports.createItem = function(schemaName, item){
   if (!schemaName) return Promise.reject(new Error('expected schemaName'));
   if (!item) return Promise.reject(new Error('expected item'));
-  // try {
-  //   mkdirp.mkdirpAsync(`${__dirname}/../data/${schemaName}`);
-  // } catch (err) {
-  //   if (err === 'ENONET'){
-  //     return mkdirp.mkdirpAsync(`${__dirname}/../data/${schemaName}`);
-  //   }
-  // }
+  
   let json = JSON.stringify(item);
   fs.accessProm(`${__dirname}/../data/${schemaName}/`)
   .catch( err => {
