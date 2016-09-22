@@ -33,12 +33,10 @@ router.get('/api/character', function(req, res){
     });
     return;
   }
-  console.log('id is ', req.url.query.id);
   res.writeHead(400, {
     'Content-Type': 'application/json',
   });
   var allIDs = storage.availIDs();
-  console.log(allIDs);
   res.write(JSON.stringify(allIDs));
   res.end();
 });
@@ -47,9 +45,7 @@ router.delete('/api/character', function(req, res){
   if (req.url.query.id) {
     storage.deleteItem('character', req.url.query.id)
     .then(() => {
-      res.writeHead(204, {
-        'Content-Type':'application/json',
-      });
+      res.writeHead(204);
       res.end();
     })
     .catch(err => {
@@ -62,7 +58,7 @@ router.delete('/api/character', function(req, res){
     });
     return;
   }
-  res.writeHead(404, {
+  res.writeHead(400, {
     'Content-Type': 'text/plain',
   });
   res.write('no character ID given');
