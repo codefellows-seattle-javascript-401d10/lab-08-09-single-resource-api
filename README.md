@@ -95,5 +95,5 @@ This should return a valid JSON object with all of the pre-determined key:value 
 
 To delete a journal entry, require the id of the entry you wish to delete and pass that as query to the URL with the DELETE method specified in the request:
 ```
-echo '{"headline": "headline text goes here", "article": "article text goes here"}' | http DELETE localhost:3000/api/journal/?=<journal entry id>
+http DELETE localhost:3000/api/journal/?=<journal entry id>
 ```
