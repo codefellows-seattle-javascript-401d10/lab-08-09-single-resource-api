@@ -62,7 +62,7 @@ router.delete('/api/person', function(req, res){
     storage.deleteItem('person', req.url.query.id)
     .then(() => {
       res.writeHead(204,{'Content-Type': 'text/plain'});
-      res.write(`selected person deleted successfully`);
+      res.write('selected person deleted successfully');
       res.end();
     })
     .catch ( err => {
