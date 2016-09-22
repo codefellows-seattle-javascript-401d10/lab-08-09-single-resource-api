@@ -2,7 +2,7 @@
 
 For this assignment we created a simple, single resource REST API allowing a user to use the normal CRUD operations (except you can't update yet). The server was created using the 'http' module in Node. I specifically made a /api/beer resource, with properties of: name, style, and abv. A unique generated id is also created when a new Beer object is POSTed.
 
-All examples shown are made using httpie.
+All examples shown are run using httpie.
 
 npm modules used:
 
