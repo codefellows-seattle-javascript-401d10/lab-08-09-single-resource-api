@@ -60,7 +60,7 @@ describe('testing character routes', function(){
         done();
       });
     });
-    it('should return a 400 SC if no ID provided', function(done){
+    it('should return a 400 if no ID provided', function(done){
       request.get('localhost:3000/api/character')
       .end((err, res) => {
         expect(res.status).to.equal(400);
@@ -71,6 +71,29 @@ describe('testing character routes', function(){
       request.get('localhost:3000/api/character')
       .end((err, res) => {
         expect(res.body).to.be.instanceOf(Array);
+        done();
+      });
+    });
+  });
+  describe('testing DELETE /api/character', function(){
+    it('should return a 204 when passed a valid ID', function(done){
+      request.delete(`localhost:3000/api/character?id=${character.id}`)
+      .end((err, res) => {
+        expect(res.status).to.equal(204);
+        done();
+      });
+    });
+    it('should return a 404 for invalid IDs', function(done){
+      request.delete('localhost:3000/api/character?id=foobar')
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        done();
+      });
+    });
+    it('should return a 400 if no ID', function(done){
+      request.delete('localhost:3000/api/character')
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
         done();
       });
     });
