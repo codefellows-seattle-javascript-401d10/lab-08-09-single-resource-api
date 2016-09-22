@@ -72,3 +72,21 @@ Once your file structure has been set up you can install the following as Dev de
 
 Other dependencies:
 * node-uuid
+
+To run the program:
+Run the server file
+```
+node <filename>
+```
+
+To create a new journal entry use the following which will be treated as a JSON object:
+```
+echo '{"headline": "headline text goes here", "article": "article text goes here"}' | http POST localhost:3000/api/journal
+```
+This should return a valid JSON object with all of the pre-determined key:value pairs
+**Note that /journal is the endpoint for this specific use case**
+
+To delete a journal entry, require the id of the entry you wish to delete and pass that as query to the URL with the DELETE method specified in the request:
+```
+echo '{"headline": "headline text goes here", "article": "article text goes here"}' | http DELETE localhost:3000/api/journal/?=<journal entry id>
+```
