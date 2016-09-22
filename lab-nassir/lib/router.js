@@ -46,7 +46,7 @@ Router.prototype.route = function(){
       }
 
       console.error('Route not found!');
-      res.writeHead(400, {
+      res.writeHead(404, {
         'Content-Type': 'text/plain',
       });
       res.write('Not found!');
