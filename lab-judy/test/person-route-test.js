@@ -85,5 +85,15 @@ describe('testing person routes', function(){
       });
     });
   });
+  describe('testing #storage.deleteItem', function(){
+    it('should delete my ass', function(done){
+      request.delete(`localhost:3000/api/person?id=${person.id}`)
+      .end ((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(204);
+        done();
+      });
+    });
+  });
 
 });
