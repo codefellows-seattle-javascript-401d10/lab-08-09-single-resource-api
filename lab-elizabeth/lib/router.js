@@ -39,8 +39,6 @@ Router.prototype.route = function(){
         this.routes[req.method][req.url.pathname](req, res);
         return;
       }
-
-      console.error('route not found');
       res.writeHead(404, {
         'Content-Type': 'text/plain',
       });
