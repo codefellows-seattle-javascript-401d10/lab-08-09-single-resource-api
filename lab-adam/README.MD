@@ -1,12 +1,14 @@
-<h1>Homegrown Router</h1>
+<h1>REST API for Cartoon Characters with a homegrown Router</h1>
 
-This application serves as an example of a 'vanilla' or ground up router built off the 'http' and 'router' modules. It uses Mocha, Chai, and Superagent for testing.
+This is a REST API following the CRUD model that allows clients to create, retrieve and delete cartoon characters. It's built on a 'vanilla' or ground up router built off the 'http' and 'router' modules. It uses Mocha, Chai, and Superagent for testing.
 
 With this API you can create, retrieve and delete "Characters" with properties including:
-- name
+- name (.e.g. bugs bunny)
 - height
 - weight
-- saying
+- saying (e.g. 'ehh, whats up doc?')
+
+This app features persistent storage, storing characters in individual JSON files.
 
 The router passes all of the following tests:
 - GET - test 404, responds with 'not found' for valid request made with an id that was not found
