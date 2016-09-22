@@ -1,7 +1,7 @@
 'use strict';
 
 const del = require('del');
-
+const mkdirp = require('mkdirp');
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 
@@ -43,22 +43,11 @@ exports.deleteItem = function(schemaName, id){
   return del([`${__dirname}/../data/${schemaName}/${id}.json`])
   .then ( paths => {
     try{
-      console.log(paths, ' line 46');
       console.log('file deleted?\n', paths.join('\n'));
     } catch (err) {
       return Promise.reject(err);
     }
   })
   .catch (err => Promise.reject(err));
-
-  // return fs.unlinkProm(`${__dirname}/../data/${schemaName}/${id}.json`)
-  //   .then( () => {
-  //     try {
-  //       console.log('file successfully deleted?');
-  //     } catch (err) {
-  //       return Promise.reject(err);
-  //     }
-  //   });
-
 
 };
