@@ -80,7 +80,12 @@ Run the server file
 node <filename>
 ```
 
-To create a new journal entry use the following which will be treated as a JSON object:
+To create a GET request:
+```
+http localhost:3000/api/journal?id=<id>
+```
+
+To create a new POST request:
 ```
 echo '{"headline": "headline text goes here", "article": "article text goes here"}' | http POST localhost:3000/api/journal
 ```
