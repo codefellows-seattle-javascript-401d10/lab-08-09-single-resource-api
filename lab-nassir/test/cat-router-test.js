@@ -35,7 +35,7 @@ describe('Testing cat routes', function() {
       request.post('localhost:3000/api/cat')
       .end((err, res) => {
         expect(res.status).to.equal(400);
-        expect(res.text).to.equal('Bad request!');
+        expect(res.text).to.equal('Bad router request!');
         expect(err).to.not.equal(null);
         done();
       });
@@ -72,6 +72,15 @@ describe('Testing cat routes', function() {
       });
     });
   });
+  describe('Testing DELETE /api/cat', function(){
+    it('If successfully deleted, should return a 204 status and a No Content message', function(done){
+      request.delete(`localhost:3000/api/cat?id=${cat.id}`)
+      .end((err, res) => {
+        expect(res.status).to.equal(204);
+        done();
+      });
+    });
+  });
 
   describe('Testing unregistered routes', function(){
     it('Should return a 404 status and an error message', function(done){
@@ -85,4 +94,5 @@ describe('Testing cat routes', function() {
       });
     });
   });
+
 });

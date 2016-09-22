@@ -35,7 +35,7 @@ module.exports = function(router){
   router.delete('/api/cat', function(req, res){
     if (req.url.query.id) {
       storage.deleteItem('cat', req.url.query.id)
-      .then( () => {
+      .then(() => {
         response.sendText(res, 204, 'This message will not write.');
       })
       .catch( err => {
