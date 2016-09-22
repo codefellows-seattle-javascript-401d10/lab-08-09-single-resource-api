@@ -1,13 +1,11 @@
-'use strict';
-
+// 'use strict';
+//
 const request = require('superagent');
 const expect = require('chai').expect;
-const mocha = require('mocha');
-const gulp = require('gulp');
 
 require('../server.js');
-
-
+//
+//
 describe('testing person routes', function(){
   var person = null;
 
@@ -60,15 +58,16 @@ describe('testing person routes', function(){
     });
   });
 
-// `GET` - test 200, response body like `{<data>}` for a request made with a valid id// TODO: Fix this
+
   describe('testing if status is 200 with valid id', function(){
     it('should return status 200 with valid id', function(done){
       console.log(person, 'line 66');
       console.log(person.id, 'line 67');
-      request.get(`localhost:3000/api/person/?id=${person.id}`)
+      request.get(`localhost:3000/api/person?id=${person.id}`)
     .end ((err, res) => {
       expect(res.status).to.equal(200);
-      expect(res.body).to.equal(person);
+      expect(res.body.id).to.equal(person.id);
+      expect(res.body.name).to.equal(person.name);
       done();
     });
     });

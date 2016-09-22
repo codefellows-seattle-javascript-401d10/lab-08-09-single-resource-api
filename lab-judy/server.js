@@ -15,11 +15,13 @@ const router = new Router();
 
 //module logic
 router.get('/api/person', function(req, res){
+  console.log('get route hit');
   if (req.url.query.id) {
     storage.fetchItem('person', req.url.query.id)
     .then(person => {
+      console.log(person, ' line 22 server.js');
       res.writeHead(200, {
-        'Content-Type': 'application.json',
+        'Content-Type': 'application/json',
       });
       res.write(JSON.stringify(person));
       res.end();
@@ -50,7 +52,7 @@ router.post('/api/person', function(req, res){
     res.end();
   } catch (err) {
     console.error(err);
-    res.writeHead(400, {'Content-Type:': 'text/plain'});
+    res.writeHead(400, {'Content-Type': 'text/plain'});
     res.write('bad request');
     res.end();
   }
