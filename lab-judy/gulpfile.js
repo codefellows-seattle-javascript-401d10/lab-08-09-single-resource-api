@@ -22,4 +22,4 @@ gulp.task('dev', function(){
   gulp.watch(['**/*.js', '!node_modules/**'], ['lint', 'test']);
 });
 
-gulp.task('default', ['lint']);
+gulp.task('default', ['test']);
