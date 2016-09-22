@@ -38,6 +38,9 @@ exports.deleteItem = function(schemaName, id){
   if(!id) return Promise.reject(new Error('expected id'));
 
   return del(`${__dirname}/../data/${schemaName}/${id}.json`)
-    .then( path => path.join('\n'))
+    .then( path => {
+      path.join('\n');
+      console.log('the file named ' , path ,'deleted');
+    })
     .catch( err => Promise.reject(err));
 };
