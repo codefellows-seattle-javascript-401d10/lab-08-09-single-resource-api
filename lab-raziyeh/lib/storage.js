@@ -2,8 +2,9 @@
 
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'),{suffix:'Prom'});
+const del = require('del');
 
-const storage = {};
+//const storage = {};
 module.exports = exports = {};
 
 exports.createItem = function(schemaName, item) {
@@ -11,34 +12,32 @@ exports.createItem = function(schemaName, item) {
   if(!item) return Promise.reject(new Error('expected item'));
 
   let json = JSON.stringify(item);
-  return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.creationDate}.json`,json)
+  return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`,json)
   .then(() => item)
   .catch( err => Promise.reject(err));
 };
 
 exports.fetchItem = function(schemaName, id){
-  // do error handling
-  return new Promise((resolve, reject) => {
-    if (!schemaName) return reject(new Error('expected schemaName'));
-    if (!id) return reject(new Error('expected id'));
+  if(!schemaName) return Promise.reject(new Error('expected schemaName'));
+  if(!id) return Promise.reject(new Error('expected id'));
 
-    var schema = storage[schemaName];
-    if(!schema) return reject(new Error('schema not found'));
-    var item = schema[id];
-    if(!item) return reject(new Error('item not found'));
-    resolve(item);
-  });
+  return fs.readFileProm(`${__dirname}/../data/${schemaName}/${id}.json`)
+    .then( data => {
+      try {
+        let item = JSON.parse(data);
+        return item;
+      } catch (err) {
+        return Promise.reject(err);
+      }
+    })
+    .catch(err => Promise.reject(err));
 };
 
 exports.deleteItem = function(schemaName, id){
-  // do error handling
-  return new Promise((resolve, reject) => {
-    if (!schemaName) return reject(new Error('expected schemaName'));
-    if (!id) return reject(new Error('expected id'));
-    
-    if(!storage[schemaName]) return reject(new Error('schema not found'));
-    if(!storage[schemaName][id]) return reject(new Error('item not found'));
+  if(!schemaName) return Promise.reject(new Error('expected schemaName'));
+  if(!id) return Promise.reject(new Error('expected id'));
 
-    if(storage[schemaName][id]) resolve(delete (storage[schemaName][id]));
-  });
+  return del(`${__dirname}/../data/${schemaName}/${id}.json`)
+    .then( path => path.join('\n'))
+    .catch( err => Promise.reject(err));
 };

@@ -13,6 +13,7 @@ const router = new Router();
 
 require('./route/person-route.js')(router);
 
-http.createServer(router.route()).listen(PORT, function(){
+const server = http.createServer(router.route());
+server.listen(PORT, function(){
   console.log('server up ::', PORT);
 });
