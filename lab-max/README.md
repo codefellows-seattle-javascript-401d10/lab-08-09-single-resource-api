@@ -24,40 +24,51 @@ node server.js
 #POST
 - To make a valid POST, will return a 200 status code:
   ```
-  echo { "name": "Rainier", "style": "Lager", "abv": "4.0" | http POST localhost:3000/api/beer
+  echo { "name": "Rainier", "style": "Lager", "abv": "4.0" } | http POST localhost:3000/api/beer
   ```
 
 - Example of a 'bad request' will return a 400 status code:
   ```
-  echo { "name": "Rainier", "style": "", "whoops": "4.0" | http POST localhost:3000/api/beer
+  echo { "name": "Rainier", "style": "", "whoops": "4.0" } | http POST localhost:3000/api/beer
   ```
 
 #GET
 - Once one or more POST requests have been made, you can run GET requests to receive that data.
 - A valid GET request, will return a 200 status code:
+
   ```
   http localhost:3000/api/beer?id=(specific id)
   ```
+
 - A GET request to an id that doesn't exist will return a 404 status code:
+
   ```
   http localhost:3000/api/beer?id=12345
   ```
+
 - A 'bad request' GET request will return a 400 status code:
+
   ```
   http localhost:3000/api/beer
   ```
 
 #DELETE
 - One one ore most POST requests have been made, you can run DELETE requests to delete data from the 'database'.
+
 - A valid DELETE request, will return a 204 status code:
+
   ```
   http DELETE localhost:3000/api/beer?id=(specific id)
   ```
+
 - A DELETE request to an id that doesn't exist will return a 404 status code:
+
   ```
   http DELETE localhost:3000/api/beer?id=12345
   ```
+
 - A 'bad request' DELETE request will return a 400 status code:
+
   ```
   http DELETE localhost:3000/api/beer
   ```
