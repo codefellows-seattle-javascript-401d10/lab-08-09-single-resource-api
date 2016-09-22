@@ -56,7 +56,7 @@ router.post('/api/person', function(req, res){
   }
 });
 
-//TODO: Write delete method? Not working....
+
 router.delete('/api/person', function(req, res){
   if (req.url.query.id){
     storage.deleteItem('person', req.url.query.id)

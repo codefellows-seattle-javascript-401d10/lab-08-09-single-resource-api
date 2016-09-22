@@ -64,12 +64,11 @@ describe('testing person routes', function(){
   describe('testing if status is 200 with valid id', function(){
     it('should return status 200 with valid id', function(done){
       console.log(person, 'line 66');
+      console.log(person.id, 'line 67');
       request.get(`localhost:3000/api/person/?id=${person.id}`)
     .end ((err, res) => {
-      console.log(res.status, ' line 70');
-      console.log(res.body, ' at line 71');
       expect(res.status).to.equal(200);
-      // expect(res.body).to.equal(person);
+      expect(res.body).to.equal(person);
       done();
     });
     });
