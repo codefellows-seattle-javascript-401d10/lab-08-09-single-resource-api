@@ -55,7 +55,8 @@ module.exports = function(router){
       storage.deleteItem('note', req.url.query.id)
       .then(() => {
         res.writeHead(204);
-        res.write('successfully deleted'); //<---DO?
+        res.write('successfully deleted');
+
         res.end();
       })
       .catch (err => {
