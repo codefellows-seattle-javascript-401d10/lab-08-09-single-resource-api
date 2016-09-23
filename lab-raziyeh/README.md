@@ -3,7 +3,28 @@
 Writing a REST API using Bluebird Promises.
 structures :
 
-![structures](http://picresize.com/popup.html?images/rsz_structure.png)
+
+- lib
+    - parse-json.js
+    - parse-url.js
+    - storage.js
+    - router.js
+    - response.js : a module for define responses (JSON / TEXT) from server.
+- model
+    - person.js
+- route
+    - person-route.js
+- test
+    - person-route-test.js
+- data
+    - schemaName (example:person)
+        - JSON files - created with POST request
+- root 
+    - server.js
+    - gulpfile.js
+    - .gitignore
+    - .eslintrc
+    - README.md
 
 ## Getting Started
 - In terminal enter : node server.js 
