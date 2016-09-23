@@ -1,5 +1,6 @@
-![cf](https://i.imgur.com/7v5ASc8.png) lab-09-single-resource-api (SIMPLE PERSISTANCE)
-======
+
+![cf](https://i.imgur.com/7v5ASc8.png) lab-09-single-resource-api (SIMPLE PERSISTENCE)
+
 
 # To Submit this Assignment
   * working for the same fork from lab-08
@@ -14,13 +15,22 @@ Here are some npm modules that you may find useful for this project, it is not r
 * [mkdirp](https://github.com/substack/node-mkdirp) - like `mkdir -p` but Node.js
 
 # Directions
-* make these directorys to organize your code
+<<<<<<< HEAD
+* make these directories to organize your code
  * lib
  * test
  * model
- * route 
- * data // to hold your resouces
-* refactor the **storage** module to have file system persistance 
+ * route
+ * data // to hold your resources
+* re-factor the **storage** module to have file system persistence
+=======
+* make these directories to organize your code
+ * lib
+ * test
+ * model
+ * route
+ * data // to hold your resources
+* re-factor the **storage** module to have file system persistence
 
 ## Bonus
 * **2pts** - have the **storage** module check for the type sub-directory, and create it if it does not exist
