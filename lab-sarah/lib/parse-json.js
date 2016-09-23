@@ -23,10 +23,9 @@ module.exports = function(req){
         console.error(err);
         reject(err);
       });
-
+      
       return;
     }
-    // resolve if anything but post or put
     resolve();
   });
 };

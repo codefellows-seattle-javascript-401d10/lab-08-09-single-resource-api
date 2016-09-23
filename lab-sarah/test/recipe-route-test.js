@@ -1,6 +1,5 @@
 'use strict';
 
-//when you pass err to done, thinks there's been an error. So only pass err to done when you want there to be an error....or something
 
 const request = require('superagent');
 const expect = require('chai').expect;

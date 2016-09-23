@@ -19,7 +19,7 @@ module.exports = function(router){
     }
     response.sendText(res, 400, 'bad request');
   });
-  //callback should just create a recipe
+
   router.post('/api/recipe', function(req, res) {
     try {
       var recipe = new Recipe(req.body.name, req.body.content);
@@ -38,17 +38,6 @@ module.exports = function(router){
   });
 
   router.delete('/api/recipe', function(req, res) {
-    // try {
-    //   storage.deleteItem('recipe', req.url.query.id)
-    //   .then( () => {
-    //   })
-    //   .catch
-    //   })
-    //   res.sendText(res, 200, 'recipe deleted');
-    // } catch (err) {
-    //   res.send(err, 404, ' request')
-
-    // }
     if(req.url.query.id){
       storage.deleteItem('recipe', req.url.query.id)
       .then(() => {

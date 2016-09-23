@@ -33,7 +33,7 @@ exports.fetchItem = function(schemaName, id){
 };
 
 exports.deleteItem = function(schemaName, id){
-
+  //do error handling
   if (!schemaName) return Promise.reject(new Error('expected schemaName'));
   if (!id) return Promise.reject(new Error('expected id'));
 
@@ -44,12 +44,4 @@ exports.deleteItem = function(schemaName, id){
   .catch(err => {
     Promise.reject(err);
   });
-
-    // var schema = storage[schemaName];
-    // if (!schema) return reject(new Error('schema not found'));
-    // var item = schema[id];
-    // if (!item) return reject(new Error('item doesnt exist, cant be deleted'));
-    // //if the item exists, delete it from the storage object
-    // delete schema[id];
-    // resolve();
 };
