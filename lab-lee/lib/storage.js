@@ -4,8 +4,6 @@ const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 const mkdirp = Promise.promisifyAll(require('mkdirp'), {suffix: 'Prom'});
 
-// const storage = {};
-
 module.exports = exports = {};
 
 exports.createItem = function(schemaName, item){
