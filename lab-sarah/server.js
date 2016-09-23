@@ -1,7 +1,5 @@
 'use strict';
 
-//rest api: server that allows users to control with http
-
 //node modules
 const http = require('http');
 //npm modules
