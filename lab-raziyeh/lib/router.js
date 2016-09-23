@@ -2,6 +2,7 @@
 
 const parseURL = require('./parse-url.js');
 const parseJSON = require('./parse-json.js');
+const response = require('./response.js');
 
 const Router = module.exports = function() {
   this.routes = {
@@ -42,9 +43,7 @@ Router.prototype.route = function() {
       res.writeHead(404, {'Content-Type' : 'text/plain'});
     }).catch(err => {
       console.error('error' , err);
-      res.writeHead(404, {'Content-Type' : 'text/plain'});
-      res.write('bad request');
-      res.end();
+      response.sendText(res,404,'bad request');
     });
   });
 };

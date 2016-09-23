@@ -37,8 +37,6 @@ module.exports = function(router) {
       storage.deleteItem('person', req.url.query.id)
     .then(() => {
       response.sendText(res,204);
-      //res.writeHead(204, {'Content-Type': 'application/json'});
-      //res.end();
     })
     .catch( err => {
       console.error(err);

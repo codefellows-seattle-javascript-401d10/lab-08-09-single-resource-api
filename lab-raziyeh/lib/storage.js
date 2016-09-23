@@ -2,10 +2,9 @@
 
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'),{suffix:'Prom'});
-const del = require('del');
 const mkdirp = Promise.promisifyAll(require('mkdirp-bluebird'),{suffix:'Prom'});
+const del = require('del');
 
-//const storage = {};
 module.exports = exports = {};
 
 exports.createItem = function(schemaName, item) {
@@ -43,6 +42,5 @@ exports.deleteItem = function(schemaName, id){
     .then( path => {
       path.join('\n');
       console.log('the file named ' , path ,'deleted');
-    })
-    .catch( err => Promise.reject(err));
+    }).catch (err => Promise.reject(err));
 };

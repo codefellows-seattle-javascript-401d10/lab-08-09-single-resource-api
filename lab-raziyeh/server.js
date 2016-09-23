@@ -15,5 +15,5 @@ require('./route/person-route.js')(router);
 
 const server = http.createServer(router.route());
 server.listen(PORT, function(){
-  console.log('server up ::', PORT);
+  console.log('server up on Port: ', PORT);
 });

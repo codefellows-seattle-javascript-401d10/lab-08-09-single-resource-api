@@ -1,6 +1,4 @@
 'use strict';
-//Create a url parser that returns a promise and uses nodes url and 
-//querystring modules parse the request url
 
 const parseURL = require('url').parse;
 const parseQuery = require('querystring').parse;

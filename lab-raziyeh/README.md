@@ -1,16 +1,25 @@
-# Vanilla-REST-API
+# Vanilla-REST-API: Persistant Storage
 =============
-
+Writing a REST API using Bluebird Promises.
 structures :
+
+![structures](https://i.imgsafe.org/490ea07aee.png)
+
 - lib
     - parse-json.js
     - parse-url.js
     - storage.js
     - router.js
+    - response.js : a module for define responses (JSON / TEXT) from server.
 - model
     - person.js
+- route
+    - person-route.js
 - test
     - person-route-test.js
+- data
+    - schemaName (example:person)
+        - JSON files - created with POST request
 - root 
     - server.js
     - gulpfile.js
@@ -31,7 +40,7 @@ structures :
 - dependencies: 
 
 ```
-npm install --save node-uuid superagent
+npm install --save node-uuid superagent bluebird mkdirp-bluebird del 
 
 ```
 
@@ -66,9 +75,9 @@ npm install -D gulp-eslint gulp-mocha mocha gulp chai
         - GET - test 200, response body like {<data>} for a request made with a valid id
         - POST - test 400, responds with 'bad request' for if no body provided or invalid body
         - POST - test 200, response body like {<data>} for a post request with a valid body
+        - DELETE - test 204
 
 ## Built With:
-
 * Nodejs
 * JavaScript
 * Visual studio code 3 
