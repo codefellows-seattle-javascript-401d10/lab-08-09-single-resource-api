@@ -9,15 +9,6 @@ require('../server.js');
 describe('testing person routes', function(){
   var person = null;
 
-  describe('testing to see if 404 is returned status code for unregisterd routes', function(){
-    it(',should return 404 status', function(done){
-      request.get('localhost:3000/api/person/badroute')
-    .end((err, res) => {
-      expect(res.status).to.equal(404);
-      done();
-    });
-    });
-  });
 
   describe('testing to see if a person is returned', function(){
     it('should return a person', function(done){
@@ -33,19 +24,6 @@ describe('testing person routes', function(){
       });
     });
   });
-
-
-  describe('testing for bad id', function(){
-    it('should return status 404 due to bad id', function(done){
-      request.get('localhost:3000/api/person/id=badID#')
-    .end((err, res) => {
-      expect(res.status).to.equal(404);
-      expect(res.text).to.equal('not found');
-      done();
-    });
-    });
-  });
-
 
   describe('testing to see if status code is 400 if no id was provided in request', function(){
     it('should return status 400 if no id in request', function(done){
@@ -92,6 +70,27 @@ describe('testing person routes', function(){
         expect(res.status).to.equal(204);
         done();
       });
+    });
+  });
+
+  describe('testing to see if 404 is returned status code for unregisterd routes', function(){
+    it(',should return 404 status', function(done){
+      request.get('localhost:3000/api/person/badroute')
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        done();
+      });
+    });
+  });
+
+  describe('testing for bad id', function(){
+    it('should return status 404 due to bad id', function(done){
+      request.get('localhost:3000/api/person/id=badID#')
+    .end((err, res) => {
+      expect(res.status).to.equal(404);
+      expect(res.text).to.equal('not found');
+      done();
+    });
     });
   });
 

@@ -7,14 +7,14 @@ const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
 
 module.exports = exports = {};
 
-function createDirectories (schemaName){
-  if (!schemaName){
-    mkdirp(`${__dirname}/../data/${schemaName}`, err => {
-      if (err) return err;
-      console.log('new data file created');
-    });
-  }
+function createDirectories (folderName, schemaName){
+  if (!folderName && !schemaName) return Promise.reject(new Error('expected folderName and schemaName'));
+  return mkdirp(`${__dirname}/../data/${schemaName}`, err => {
+    if (err) return err;
+    console.log('new data directory created');
+  });
 }
+
 
 exports.createItem = function(schemaName, item){
   //do error handling
@@ -23,7 +23,8 @@ exports.createItem = function(schemaName, item){
 
 
   let json = JSON.stringify(item);
-  createDirectories(schemaName);
+  if (!createDirectories('data', schemaName));
+  createDirectories('data', schemaName);
   return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
   .then( () => item )
   .catch( err => Promise.reject(err));
