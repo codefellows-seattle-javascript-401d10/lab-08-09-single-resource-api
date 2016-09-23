@@ -36,7 +36,7 @@ module.exports = function(router){
   //should delete an already existing book
   router.delete('/api/book', function(req, res){
     if(req.url.query.id){
-      storage.deleteItem('recipe', req.url.query.id)
+      storage.deleteItem('book', req.url.query.id)
       .then(() => {
         response.sendText(res, 204, 'no content');
       })
