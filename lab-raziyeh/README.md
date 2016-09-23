@@ -3,7 +3,7 @@
 Writing a REST API using Bluebird Promises.
 structures :
 
-![structures](http://picresize.com/popup.html?images/rsz_2screen_shot_2016-09-22_at_71736_pm.png)
+![structures](http://picresize.com/popup.html?images/rsz_structure.png)
 
 ## Getting Started
 - In terminal enter : node server.js 
