@@ -19,14 +19,13 @@
   "homepage": "https://github.com/kaylynyuh/lab-08-09-single-resource-api#readme",
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^3.5.0",
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
     "gulp-mocha": "^3.0.1",
-    "mocha": "^3.0.2",
-    "superagent": "^2.3.0"
+    "mocha": "^3.0.2"
   },
   "dependencies": {
+    "superagent": "^2.3.0",
     "bluebird": "^3.4.6",
     "mkdirp": "^0.5.1",
     "node-uuid": "^1.4.7"
