@@ -1,28 +1,29 @@
 {
   "name": "lab-kaylyn",
   "version": "1.0.0",
-  "description": "REST API",
-  "main": "server.js",
+  "description": "* fork this repository   * write all of your code in a directory named `lab-` + `<your name>` **e.g.** `lab-duncan`   * push to your repository   * submit a pull request to this repository   * submit a link to your PR in canvas   * write a question and observation on canvas",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "keywords": [],
-  "repository": "https://github.com/kaylynyuh/lab-08-09-single-resource-api",
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
+    "bluebird": "^3.4.6",
     "chai": "^3.5.0",
+    "eslint": "^3.5.0",
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
     "gulp-mocha": "^3.0.1",
-    "mocha": "^3.0.2"
-  },
-  "dependencies": {
+    "mkdirp": "^0.5.1",
+    "mkdirp-bluebird": "^1.0.1",
     "node-uuid": "^1.4.7",
     "superagent": "^2.3.0"
-  }
+  },
+  "devDependencies": {
+    "mocha": "^3.0.2"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "yuhkay4@gmail.com",
+  "license": "ISC"
 }
