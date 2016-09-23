@@ -73,7 +73,15 @@ describe('Testing cat routes', function() {
     });
   });
   describe('Testing DELETE /api/cat', function(){
-    it('If successfully deleted, should return a 204 status and a No Content message', function(done){
+    it('If successfully deleted, should return a 404 status (no id)', function(done){
+      request.delete('localhost:3000/api/cat/?id=')
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        done();
+      });
+    });
+    
+    it('If successfully deleted, should return a 204 status', function(done){
       request.delete(`localhost:3000/api/cat?id=${cat.id}`)
       .end((err, res) => {
         expect(res.status).to.equal(204);

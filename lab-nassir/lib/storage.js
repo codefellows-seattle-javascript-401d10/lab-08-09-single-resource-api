@@ -45,7 +45,6 @@ exports.fetchItem = function(schemaName, id) {
 exports.deleteItem = function(schemaName, id) {
   if(!schemaName) return Promise.reject(new Error('We expected a schemaName...'));
   if(!id) return Promise.reject(new Error('We expected an id...'));
-  console.log('deleteItem id: ', id);
 
   return del(`${__dirname}/../data/${schemaName}/${id}.json`);
 };
