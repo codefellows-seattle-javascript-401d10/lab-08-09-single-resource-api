@@ -16,12 +16,13 @@ describe('testing recipe routes', function(){
   describe('testing POST /api/recipe', function(){
     it ('should return a recipe', function(done){
       request.post('localhost:3000/api/recipe')
-      .send({name: 'recipe1', content: 'goose'}) //if you pass in done, that means that an error has occurred
+      .send({name: 'recipe1', content: 'goose', type: 'dinner'}) //if you pass in done, that means that an error has occurred
       .end((err,res) => {
         if (err) return done(err);
         expect(res.status).to.equal(200);
         expect(res.body.name).to.equal('recipe1');
         expect(res.body.content).to.equal('goose');
+        expect(res.body.type).to.equal('dinner');
         recipe  = res.body;
         done(); //get this otherwise timeout error
       });
@@ -44,16 +45,17 @@ describe('testing recipe routes', function(){
     it ('should return a recipe', function(done){
       console.log(recipe);
       request.get(`localhost:3000/api/recipe?id=${recipe.id}`)
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res.status).to.equal(200);
-          expect(res.body.name).to.equal('recipe1');
-          expect(res.body.content).to.equal('goose');
-          done();
-        });
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(200);
+        expect(res.body.name).to.equal('recipe1');
+        expect(res.body.content).to.equal('goose');
+        expect(res.body.type).to.equal('dinner');
+        done();
+      });
     });
     it ('should return not found', function(done){
-      request.get('localhost:3000/api/recipe?id=1023412938419238471')
+      request.get('localhost:3000/api/recipe?id=102341293asdf8419238471')
         .end((err, res) => {
           expect(res.status).to.equal(404);
           done();
