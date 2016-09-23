@@ -7,7 +7,6 @@ require('../server.js');
 
 describe('testing note routes', function() {
   var note = null;
-
   describe('testing POST /api/note', function() {
     it('should return a note', function(done) {
       request.post('localhost:3000/api/note')
