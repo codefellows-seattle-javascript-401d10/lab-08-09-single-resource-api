@@ -49,17 +49,3 @@ exports.deleteItem = function(schemaName, id) {
   })
   .catch(err => Promise.reject(err));
 };
-//
-// exports.deleteItem = function(schemaName, id) {
-//   return new Promise((resolve, reject) => {
-//     if (!schemaName) return reject(new Error('expected a schemaName'));
-//     if (!id) return reject(new Error('expected an id'));
-//
-//     var schema = storage[schemaName];
-//     if(!schema) return reject(new Error('schema not found'));
-//     var item = schema[id];
-//     if(!item) return reject(new Error('item not found'));
-//     delete schema[id];
-//     resolve();
-//   });
-// };
