@@ -2,6 +2,8 @@
 
 const request = require('superagent');
 const expect = require('chai').expect;
+const storage = require('../lib/storage');
+const Beer = require('../model/beer');
 
 require('../server.js');
 
@@ -33,6 +35,7 @@ describe('testing beer routes', function(){
         done();
       });
     });
+
     it('should return a 400 error, bad request', function(done){
       request.post('localhost:3000/api/beer')
       .send({name: 'durr', style: '', abv:'yo'})
@@ -46,17 +49,40 @@ describe('testing beer routes', function(){
   });
 
   describe('testing GET /api/beer', function(){
-    it('should return a beer', function(done){
-      request.get(`localhost:3000/api/beer?id=${beer.id}`)
-      .end((err, res) => {
-        if (err) return done(err);
-        expect(res.status).to.equal(200);
-        expect(res.body.name).to.equal('rainier');
-        expect(res.body.style).to.equal('lager');
-        expect(res.body.abv).to.equal('4.0');
-        done();
+
+    describe('with vaid query', function(){
+      before(done => {
+        var beer = {
+          id: '1234',
+          name: 'rainier',
+          style: 'lager',
+          abv: '4.0',
+        };
+
+        storage.createItem('beer', beer)
+        .then(() => done())
+        .catch(err => done(err));
+      });
+
+      after(done => {
+        storage.deleteItem('beer', '1234')
+        .then(() => done())
+        .catch(err => done(err));
+      });
+
+      it('should return a beer', function(done){
+        request.get('localhost:3000/api/beer?id=1234')
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.name).to.equal('rainier');
+          expect(res.body.style).to.equal('lager');
+          expect(res.body.abv).to.equal('4.0');
+          done();
+        });
       });
     });
+
     it('should return a 400 error, bad request', function(done){
       request.get('localhost:3000/api/beer')
       .end((err, res) => {
@@ -66,6 +92,7 @@ describe('testing beer routes', function(){
         done();
       });
     });
+
     it('should return a 404 error, item not found', function(done){
       request.get('localhost:3000/api/beer?id=12345')
       .end((err, res) => {

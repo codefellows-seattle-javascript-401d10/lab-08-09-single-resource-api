@@ -23,8 +23,14 @@ module.exports = function(router){
   router.post('/api/beer', function(req, res) {
     try {
       var beer = new Beer(req.body.name, req.body.style, req.body.abv);
-      storage.createItem('beer', beer);
-      response.sendJSON(res, 200, beer);
+      storage.createItem('beer', beer)
+      .then(beer => {
+        response.sendJSON(res, 200, beer);
+      })
+      .catch( err => {
+        console.log(err);
+        response.sendText(res, 500, 'server error');
+      });
     } catch (err) {
       response.sendText(res, 400, 'bad request');
     }
@@ -34,7 +40,7 @@ module.exports = function(router){
     if (req.url.query.id) {
       storage.deleteItem('beer', req.url.query.id)
       .then( () => {
-        response.sendText(res, 204, 'Beer deleted');
+        response.sendText(res, 204, '');
       })
       .catch( err => {
         console.error(err);

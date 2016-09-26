@@ -9,13 +9,14 @@ module.exports = exports = {};
 exports.createItem = function(schemaName, item){
   if (!schemaName) return Promise.reject(new Error('expected schemaName'));
   if (!item) return Promise.reject(new Error('expected item'));
-  
+
   let json = JSON.stringify(item);
-  fs.accessProm(`${__dirname}/../data/${schemaName}/`)
+  return fs.accessProm(`${__dirname}/../data/${schemaName}/`)
   .catch( err => {
     if(err.code === 'ENOENT'){
       return mkdirp.mkdirpAsync(`${__dirname}/../data/${schemaName}/`);
     }
+    return Promise.reject(err); // 500 error
   })
   .then( () => fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json))
   .then( () => item)

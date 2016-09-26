@@ -10,7 +10,8 @@ const PORT = process.env.PORT || 3000;
 const router = new Router();
 //module logic
 
-require('./route/beer-route.js')(router);
+const beerRoute = require('./route/beer-route.js');
+beerRoute(router);
 
 const server = http.createServer(router.route());
 
