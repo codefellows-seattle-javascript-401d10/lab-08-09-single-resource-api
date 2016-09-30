@@ -9,7 +9,6 @@ require('../server.js');
 describe('testing person routes', function(){
   var person = null;
 
-
   describe('testing to see if a person is returned', function(){
     it('should return a person', function(done){
       request.post('localhost:3000/api/person')

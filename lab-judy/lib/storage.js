@@ -1,19 +1,16 @@
 'use strict';
 
 const del = require('del');
-const mkdirp = require('mkdirp');
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'});
+const mkdirp = Promise.promisifyAll(require('mkdirp'));
 
 module.exports = exports = {};
 
-function createDirectories (folderName, schemaName){
-  if (!folderName && !schemaName) return Promise.reject(new Error('expected folderName and schemaName'));
-  return mkdirp(`${__dirname}/../data/${schemaName}`, err => {
-    if (err) return err;
-    console.log('new data directory created');
-  });
-}
+// function createDirectories (folderName, schemaName){
+//   if (!folderName && !schemaName) return Promise.reject(new Error('expected folderName and schemaName'));
+//   return mkdirpProm(`${__dirname}/../data/${schemaName}`)
+// }
 
 
 exports.createItem = function(schemaName, item){
@@ -21,13 +18,16 @@ exports.createItem = function(schemaName, item){
   if (!schemaName) return Promise.reject(new Error('expected schemaName'));
   if (!item) return Promise.reject(new Error('expected item'));
 
-
   let json = JSON.stringify(item);
-  if (!createDirectories('data', schemaName));
-  createDirectories('data', schemaName);
-  return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json)
-  .then( () => item )
-  .catch( err => Promise.reject(err));
+  // check if the directory is there
+  return fs.accessProm(`${__dirname}/../data/${schemaName}`)
+  .catch( () => {
+    return mkdirp.mkdirpAsync(`${__dirname}/../data/${schemaName}`);
+  })
+  .then( () => {
+    return fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json);
+  })
+  .then(() => item);
 };
 
 exports.fetchItem = function(schemaName, id){
