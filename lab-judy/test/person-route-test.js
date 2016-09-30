@@ -72,8 +72,8 @@ describe('testing person routes', function(){
     });
   });
 
-  describe('testing to see if 404 is returned status code for unregisterd routes', function(){
-    it(',should return 404 status', function(done){
+  describe('testing GET to see if 404 is returned status code for unregisterd routes', function(){
+    it(',should return 404 status due to bad route', function(done){
       request.get('localhost:3000/api/person/badroute')
       .end((err, res) => {
         expect(res.status).to.equal(404);
@@ -82,9 +82,9 @@ describe('testing person routes', function(){
     });
   });
 
-  describe('testing for bad id', function(){
+  describe('testing GET for bad id', function(){
     it('should return status 404 due to bad id', function(done){
-      request.get('localhost:3000/api/person/id=badID#')
+      request.get('localhost:3000/api/person?id=badID#')
     .end((err, res) => {
       expect(res.status).to.equal(404);
       expect(res.text).to.equal('not found');
