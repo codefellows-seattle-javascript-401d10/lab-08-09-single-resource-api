@@ -15,8 +15,9 @@ exports.createItem = function(schemaName, item){
   return fs.accessProm(`${__dirname}/../data/${schemaName}`)
   .catch(err => {
     if(err.code === 'ENOENT') {
-      return mkdirp.sync(`${__dirname}/../data/${schemaName}`);
+      return mkdirp.mkdirpProm(`${__dirname}/../data/${schemaName}`);
     }
+    return Promise.reject(err);
   })
   .then( () => fs.writeFileProm(`${__dirname}/../data/${schemaName}/${item.id}.json`, json))
   .then( () => item)
