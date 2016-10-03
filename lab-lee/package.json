@@ -1,0 +1,28 @@
+{
+  "name": "lab-lee",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "mkdirp": "^0.5.1",
+    "uuid": "^2.0.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-mocha": "^3.0.1",
+    "mocha": "^3.0.2",
+    "mocha-eslint": "^3.0.1",
+    "superagent": "^2.3.0"
+  },
+  "scripts": {
+    "start": "DEBUG='note*' node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
